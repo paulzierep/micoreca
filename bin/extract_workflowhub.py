@@ -164,7 +164,7 @@ class Workflow:
         """
         Test if there are overlap between workflow name and target tags
         """
-        filtered_on = utils.test_pattern(tags, self.name)
+        filtered_on = utils.has_keyword(tags, self.name)
         if filtered_on != "":
             self.filtered_on = filtered_on
             return True
@@ -174,7 +174,7 @@ class Workflow:
         """
         Test if there are overlap between workflow description and target tags
         """
-        filtered_on = utils.test_pattern(tags, self.description)
+        filtered_on = utils.has_keyword(tags, self.description)
         if filtered_on != "":
             self.filtered_on = filtered_on
             return True

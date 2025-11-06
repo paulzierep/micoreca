@@ -43,7 +43,7 @@ def load_json(input_df: str) -> Any:
         content = json.load(t)
     return content
 
-def test_pattern(tags: dict, target: str) -> str:
+def has_keyword(tags: dict, target: str) -> str:
     for tag in tags["keywords"]:
         regexk = re.compile(format_regex(tag), re.IGNORECASE)
         if regexk.search(target):
