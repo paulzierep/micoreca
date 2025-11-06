@@ -35,7 +35,7 @@ class Workflow:
         self.license = ""
         self.doi = ""
         self.projects: List[str] = []
-        self.keep = ""
+        self.keep = None
         self.type = ""
         self.description = ""
 
@@ -184,7 +184,7 @@ class Workflow:
         """
         Update status from status table
         """
-        if wf_status["To keep"] != "":
+        if isinstance(wf_status["To keep"], bool):
             self.keep = wf_status["To keep"]
 
     def get_import_link(self) -> str:
@@ -282,15 +282,14 @@ class Workflows:
             if w.keep:
                 to_keep_wf.append(w)
                 w.filtered_on = status[w.link]["Filtered on"]
-            else:
-                if w.test_edam_terms(tags["edam"]):
-                    to_keep_wf.append(w)
-                elif w.test_tags(tags):
-                    to_keep_wf.append(w)
-                elif w.test_name(tags):
-                    to_keep_wf.append(w)
-                elif w.test_description(tags):
-                    to_keep_wf.append(w)
+            elif w.test_edam_terms(tags["edam"]):
+                to_keep_wf.append(w)
+            elif w.test_tags(tags):
+                to_keep_wf.append(w)
+            elif w.test_name(tags):
+                to_keep_wf.append(w)
+            elif w.test_description(tags):
+                to_keep_wf.append(w)
         self.workflows = to_keep_wf
 
     def curate_workflows(self, status: Dict) -> None:
@@ -299,8 +298,9 @@ class Workflows:
         """
         curated_wfs = []
         for w in self.workflows:
-            if w.link in status and status[w.link]["To keep"] == True:
+            if w.link in status:
                 w.update_status(status[w.link])
+            if w.keep:
                 curated_wfs.append(w)
         self.workflows = curated_wfs
 
