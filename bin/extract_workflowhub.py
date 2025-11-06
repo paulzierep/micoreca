@@ -139,9 +139,11 @@ class Workflow:
         """
         Test if there are overlap between workflow tags and target tags
         """
-        for tag in tags:
-            regex = re.compile(tag, re.IGNORECASE)
-            if any(regex.fullmatch(wtag.lower()) or regex.search(wtag.lower()) for wtag in self.tags):
+        # Put keywords and acronyms together since tags are saved in lowercase
+        keywords_list = tags["keywords"] + tags["acronyms"]
+        for tag in keywords_list:
+            regex = re.compile(utils.format_regex(tag), re.IGNORECASE)
+            if any(regex.search(wtag) for wtag in self.tags):
                 self.filtered_on = f"{tag} in tags"
                 return True
         return False
@@ -162,10 +164,16 @@ class Workflow:
         """
         Test if there are overlap between workflow name and target tags
         """
-        for tag in tags:
-            regex = re.compile(tag, re.IGNORECASE)
-            if regex.fullmatch(self.name.lower()) or regex.search(self.name.lower()):
+        for tag in tags["keywords"]:
+            regexk = re.compile(utils.format_regex(tag), re.IGNORECASE)
+            if regexk.search(self.name):
                 self.filtered_on = f"{tag} in name"
+                return True
+            
+        for acron in tags["acronyms"]:
+            regexa = re.compile(utils.format_regex(acron))
+            if regexa.search(self.name):
+                self.filtered_on = f"{acron} in name"
                 return True
         return False
     
@@ -173,10 +181,16 @@ class Workflow:
         """
         Test if there are overlap between workflow description and target tags
         """
-        for tag in tags:
-            regex = re.compile(tag, re.IGNORECASE)
-            if regex.fullmatch(self.description.lower()) or regex.search(self.description.lower()):
+        for tag in tags["keywords"]:
+            regexk = re.compile(utils.format_regex(tag), re.IGNORECASE)
+            if regexk.search(self.description):
                 self.filtered_on = f"{tag} in description"
+                return True
+        
+        for acron in tags["acronyms"]:
+            regexa = re.compile(utils.format_regex(acron))
+            if regexa.search(self.description):
+                self.filtered_on = f"{acron} in description"
                 return True
         return False
 
@@ -279,11 +293,11 @@ class Workflows:
                 w.update_status(status[w.link])
             if w.test_edam_terms(tags["edam"]):
                 to_keep_wf.append(w)
-            elif w.test_tags(tags["keywords"]):
+            elif w.test_tags(tags):
                 to_keep_wf.append(w)
-            elif w.test_name(tags["keywords"]):
+            elif w.test_name(tags):
                 to_keep_wf.append(w)
-            elif w.test_description(tags["keywords"]):
+            elif w.test_description(tags):
                 to_keep_wf.append(w)
         self.workflows = to_keep_wf
 

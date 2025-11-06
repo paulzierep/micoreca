@@ -21,6 +21,12 @@ def format_list_column(col: pd.Series) -> pd.Series:
     """
     return col.apply(lambda x: ", ".join(str(i) for i in x))
 
+def format_regex(pattern: str) -> str:
+    """
+    Format regex to allow various separators before and after the pattern
+    """
+    return rf"(?<![A-Za-z]){pattern}(?![A-Za-z])"
+
 def load_yaml(input_df: str) -> Dict:
     """
     Read a YAML file
