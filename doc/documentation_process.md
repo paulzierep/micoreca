@@ -1,7 +1,5 @@
 # Curation processes
 
-## Curation of the workflows
-
 To have the most relevant workflows to the microbiome community, we manually curated the workflows extracted from WorkflowHub and programmatically filtered using the keywords defined. 
 To do so, we excluded the workfows where the description evolved around terms like: 
 - Single genome analysis  
