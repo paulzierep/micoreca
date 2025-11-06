@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 import yaml
 import time
+import re
 from typing import (
     Dict,
     List,
@@ -14,12 +15,17 @@ from typing import (
 def format_date(date: str) -> str:
     return datetime.fromisoformat(date).strftime("%Y-%m-%d")
 
-
 def format_list_column(col: pd.Series) -> pd.Series:
     """
     Format a column that could be a list before exporting
     """
     return col.apply(lambda x: ", ".join(str(i) for i in x))
+
+def format_regex(pattern: str) -> str:
+    """
+    Format regex to allow various separators before and after the pattern
+    """
+    return rf"(?<![A-Za-z]){pattern}(?![A-Za-z])"
 
 def load_yaml(input_df: str) -> Dict:
     """
@@ -36,6 +42,19 @@ def load_json(input_df: str) -> Any:
     with Path(input_df).open("r") as t:
         content = json.load(t)
     return content
+
+def has_keyword(tags: dict, target: str) -> str:
+    for tag in tags["keywords"]:
+        regexk = re.compile(format_regex(tag), re.IGNORECASE)
+        if regexk.search(target):
+            return f"{tag} in description"
+    
+    for acron in tags["acronyms"]:
+        regexa = re.compile(format_regex(acron))
+        if regexa.search(target):
+            return f"{acron} in description"
+            
+    return ""
 
 def export_to_json(data: List[Dict], output_fp: str) -> None:
     """
