@@ -21,7 +21,7 @@ The workflows that were retrieved and kept if corresponding to one or more of th
 
 - **Quality Control (QC) and Filtering**: trimming, removing sequencing errors, adapter sequences, and too-short reads.
 
-- Denoising or Clustering (Feature Table Generation): denoise reads into Amplicon Sequence Variants (ASVs) or Exact Sequence Variants (ESVs) for example.
+- **Denoising or Clustering** (Feature Table Generation): denoising reads into Amplicon Sequence Variants (ASVs) or Exact Sequence Variants (ESVs), for example.
 
 - Taxonomic Assignment and Phylogenetic Tree Construction: ASV/OTU sequences compared against curated reference databases using a classifier, phylogenetic tree constructed from aligning of the sequences and inferring evolutionary distance. 
 
