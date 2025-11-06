@@ -79,7 +79,8 @@ jobs:
             --all content/workflowhub/workflows_full.json \
             --filtered content/workflowhub/workflows_filtered.json \
             --tsv-filtered content/workflowhub/workflows_filtered.tsv \
-            --tags keywords.yml
+            --tags keywords.yml \
+            --status content/workflowhub/workflows_status.tsv
       #- name: Extract all workflows metadata from WorkflowHu
       #  run: | 
       #    python bin/extract_workflowhub.py \
