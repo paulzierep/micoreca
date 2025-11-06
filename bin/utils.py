@@ -43,16 +43,16 @@ def load_json(input_df: str) -> Any:
         content = json.load(t)
     return content
 
-def has_keyword(tags: dict, target: str) -> str:
+def has_keyword(tags: dict, target: str, target_name: str) -> str:
     for tag in tags["keywords"]:
         regexk = re.compile(format_regex(tag), re.IGNORECASE)
         if regexk.search(target):
-            return f"{tag} in description"
+            return f"{tag} in {target_name}"
     
     for acron in tags["acronyms"]:
         regexa = re.compile(format_regex(acron))
         if regexa.search(target):
-            return f"{acron} in description"
+            return f"{acron} in {target_name}"
             
     return ""
 
