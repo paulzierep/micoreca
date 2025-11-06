@@ -1,4 +1,4 @@
-tool_id	filtered_on	match_value
+tool_id	filtered_on	reason
 fastep	biotools_description	profiles for the detection of conservation in genomes
 nt-seq	biotools_description	profiling.
 bioconductor-proteinprofiles	biocontainers_description	profiling
