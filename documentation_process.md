@@ -25,7 +25,7 @@ The workflows that were retrieved and kept if corresponding to one or more of th
 
 - Taxonomic Assignment and Phylogenetic Tree Construction: ASV/OTU sequences compared against curated reference databases using a classifier, phylogenetic tree constructed from aligning of the sequences and inferring evolutionary distance. 
 
-- Functional Annotation (for Metagenomics/Shotgun Sequencing): it is difficult to dedifferentiate with whole genome annotation tool
+- **Functional Annotation** (for Metagenomics/Shotgun Sequencing)
 
 - Data Normalization: address the compositional nature of microbiome data (the counts are relative, not absolute) and account for differences in sequencing depth (library size).
 
