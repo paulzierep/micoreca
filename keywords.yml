@@ -1,0 +1,28 @@
+edam:
+    topics:
+        - Metagenomics
+        - Metatranscriptomics
+        - Metabarcoding
+    operations:
+        - Read binning
+
+keywords:
+    - metage.*
+    - metab.*
+    - metat.*
+    - metap.*
+    - plasmid.*
+    - binn.*
+    - microbiom.*
+    - microbiot.*
+    - 16S
+    - Amplicon
+    - profil.*
+    - amr
+    - antimicrobial.*
+    - MAGs
+
+acronyms:
+    - ITS
+    - OTU
+    - ASV
