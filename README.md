@@ -46,7 +46,7 @@ Once resources have been extracted, they are filtered using the following decisi
     ```
     $ python bin/extract_workflowhub.py \
         extract \
-        --all content/workflows_full.json
+        --all content/workflowhub/workflows_full.json
     ```
 
 - Filter workflows based on keywords and EDAM terms
@@ -54,9 +54,9 @@ Once resources have been extracted, they are filtered using the following decisi
     ```
     $ python bin/extract_workflowhub.py \
         filter \
-        --all content/workflows_full.json \
-        --filtered content/workflows_filtered.json \
-        --tsv-filtered content/workflows_filtered.tsv \
+        --all content/workflowhub/workflows_full.json \
+        --filtered content/workflowhub/workflows_filtered.json \
+        --tsv-filtered content/workflowhub/workflows_filtered.tsv \
         --tags keywords.yml \
         --status content/workflowhub/workflows_status.tsv
     ```
