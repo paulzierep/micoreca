@@ -81,11 +81,14 @@ jobs:
             --tsv-filtered content/workflowhub/workflows_filtered.tsv \
             --tags keywords.yml \
             --status content/workflowhub/workflows_status.tsv
-      #- name: Extract all workflows metadata from WorkflowHu
-      #  run: | 
-      #    python bin/extract_workflowhub.py \
-      #      extract \
-      #      --all content/workflowhub/workflows.json
+      - name: Extract all workflows metadata from WorkflowHu
+        run: | 
+          python bin/extract_workflowhub.py \
+            curate \
+            --filtered content/workflowhub/workflows_filtered.json \
+            --curated content/workflowhub/workflows_curated.json \
+            --tsv-curated content/workflowhub/workflows_curated.tsv \
+            --status content/workflowhub/workflows_status.tsv
       - name: Archive workflows artifacts
         uses: actions/upload-artifact@v5
         with:
@@ -125,7 +128,7 @@ jobs:
         with:
           pattern: workflows
           merge-multiple: true
-          path: content/
+          path: content/workflowhub/
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
