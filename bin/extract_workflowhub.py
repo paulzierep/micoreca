@@ -392,7 +392,7 @@ if __name__ == "__main__":
         "--tags",
         "-c",
         required=True,
-        help="Path to a YAML file with WorkflowHub tags to keep in the extraction",
+        help="Path to a YAML file with the EDAM terms and keywords for the filtering",
     )
     filterwf.add_argument(
         "--status",
