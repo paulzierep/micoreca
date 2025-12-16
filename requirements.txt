@@ -3,3 +3,4 @@ pyyaml
 requests
 jinja2
 tqdm
+coverage
